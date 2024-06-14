@@ -4,3 +4,225 @@
 *:after {
   box-sizing: border-box;
 }
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+/***************** STYLING FOR THE INDEX PAGE **************/
+body {
+  background-image: url(/images/site/small_check.jpg);
+  color: #3C4142;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#wrapper {
+  background-color: whitesmoke;
+  
+}
+
+main {
+  padding: 0 .2rem;
+}
+
+
+
+/************** Styling the header ******************/
+ #top-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0.5rem;
+}
+
+.siteName a, #tools a {
+  text-decoration: none;
+  color: #212121;
+}
+
+.siteName a {
+  font-size: 2rem;
+}
+
+#tools a{
+  font-size: 0.8rem;
+}
+
+/************ Styling for navigation *************/
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  font-size: 0.8rem;
+  justify-content: space-between;
+  padding: 1rem 0.5rem;
+  color: #fff;
+  background: #081636;
+}
+
+.cta .btn {
+  background-color:aqua ;
+  border: none;
+  opacity: 1;
+  padding: 7px 13px;
+  color: black;
+}
+
+.cta {
+  position: absolute;
+  top: 15px;
+  left: 5px;
+  line-height: 15px;
+  color: #36454F;
+  background-color: whitesmoke;
+  opacity: 0.8;
+  font-size: 0.8rem;
+}
+.cta h3, .cta p {
+  opacity: 1;
+  color: black;
+}
+
+#cta-h3 {
+  padding-top: 0;
+}
+
+
+.hero-container {
+  margin-top: 1rem;
+  position:relative ;
+}
+
+.hero-container picture{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.4rem 0  0 ;
+  
+}
+
+h2 {
+  font-size: 1.3rem;
+  padding-top: 2rem;
+}
+
+h3 {
+  padding-top: 1.2rem;
+}
+
+#upgrade {
+  display: grid;
+  grid-template: auto/ 1fr 1fr;
+  gap: 20px;
+  margin-top: 0.8rem;
+
+}
+
+figure  {
+  display: flex;
+  background-color: aqua;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 92px;
+  
+}
+
+figure img {
+  padding-top: 10px;
+  /* padding-bottom: 10px; */
+}
+
+.figcaption  {
+  text-align: center;
+}
+
+footer {
+  padding: 1rem ;
+  background-color: #081636;
+  color: #fff;
+  margin-top: 1rem;
+}
+
+ul {
+  padding: 0.8rem 0 0 1.1rem; 
+} 
+
+@media (min-width: 500px){
+  .main-grid {
+    display: grid;
+    grid-template: auto/ 1fr 1fr;
+    margin-top: 2rem;
+    column-gap: 10px;  
+  }
+
+  div#wrapper {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  main {
+    margin: 0 0.5rem;
+  }
+
+  #first-col {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+  #sec-col {
+    grid-column: 2/3;
+    grid-row: 1/2;
+  }
+
+  #upgrade {
+    column-gap: 5px;
+  }
+
+  .main-section #review ul {
+    line-height: 25px;
+  }
+
+  div.cta {
+    left: 70px;
+    top: 40px;
+    font-size: 1.2rem;
+    line-height: 26px;
+  }
+
+  .hero-container .cta .btn {
+    padding: 15px;
+    font-size: 1.2rem;
+    width: 140px;
+    margin-top: 30px;
+  }
+
+   h2.main-h2  {
+    font-size: 1.7rem;
+    font-weight: 700;
+  }
+
+  body nav ul {
+    padding: 1rem 4rem;
+    font-size: 1.1rem;
+  }
+
+  .main-section ul li {
+    margin-bottom: 29px;
+  }
+  .main-section h3{
+    margin-bottom: 1rem;
+  }
+  
+  div .brg {
+    margin-top: 1rem;
+  }
+
+  footer p {
+    padding: 1rem;
+  }
+
+}
+
+
+
+

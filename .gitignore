@@ -14,3 +14,9 @@ node_modules
 
 # .DS_Store is only for Mac users
 **/.DS_Store
+
+# README.md file is a description of the starter folder
+README.md
+
+# Yaml file shouldn't be sent to remote repo
+pnpm-lock.yaml
