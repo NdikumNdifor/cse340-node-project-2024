@@ -107,7 +107,11 @@ h2 {
 }
 
 h3 {
-  padding-top: 1.2rem;
+  padding-top: 2rem;
+}
+
+#reviews  li {
+  margin-bottom: 30px;
 }
 
 #upgrade {
@@ -178,10 +182,6 @@ ul {
     column-gap: 5px;
   }
 
-  .main-section #review ul {
-    line-height: 25px;
-  }
-
   div.cta {
     left: 70px;
     top: 40px;
@@ -206,9 +206,6 @@ ul {
     font-size: 1.1rem;
   }
 
-  .main-section ul li {
-    margin-bottom: 29px;
-  }
   .main-section h3{
     margin-bottom: 1rem;
   }
