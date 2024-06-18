@@ -8,6 +8,7 @@
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
+const baseController = require("./controllers/baseController")
 const app = express()
 const static = require("./routes/static")
 
@@ -27,9 +28,7 @@ app.use(static)
 /****************** 
 *  Gets and renders the index page at the root of the folder
 *********************/
-app.get("/", function(req, res){
-  res.render("index", {title: "Home"})
-})
+app.get("/", baseController.buildHome)
 
 /* ***********************
  * Local Server Information
