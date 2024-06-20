@@ -10,7 +10,7 @@ const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
-const utilities = require("./utilities")
+const utilities = require("./utilities/")
 const app = express()
 const static = require("./routes/static")
 
@@ -30,7 +30,8 @@ app.use(static)
 /****************** 
 *  Gets and renders the index page at the root of the folder
 *********************/
-app.get("/", baseController.buildHome)
+app.get("/", utilities.handleErrors(baseController.buildHome)
+)
 
 // Inventory routes
 app.use("/inv", inventoryRoute)
@@ -47,13 +48,14 @@ app.use(async (req, res, next) => {
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
+  if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
   res.render("errors/error", {
-  title: err.status || 'Server Error',
-  message: err.message,
-  nav
+    title: err.status || 'Server Error',
+    message,
+    nav
   })
- })
- 
+})
+
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file
