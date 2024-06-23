@@ -50,6 +50,39 @@ Util.buildClassificationGrid = async function(data){
   return grid
  }
 
+ Util.builItemDetails = async function(data){
+  let details
+  details = `<div id="detail-grid">`
+
+  details += `<div id="img-container">`
+  details += `<img src="${data.inv_image}" alt="${data.inv_make} car">`
+  details += `</div>`
+
+  details += `<div id="h2-container">`
+  details += `<h2 id="heading">${data.inv_year} ${data.inv_make} ${data.inv_model}</h2>`
+  details += `</div>`
+
+  details += `<div id="prominent">`
+  details += `<div id="mileage-container"><span class="para">MILEAGE</span><span class="format">${new Intl.NumberFormat('en-US').format(data.inv_miles)}</span></p></div>`
+  details += `<h3 id="heading">Sale Price</h3>`
+  details += `<h3 id="heading">${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(data.inv_price)}</h3>`
+  details += `</div>`
+  
+
+  details += `<div id="car-details">`
+  details += `<p class="details"><span class="para">Make</span>: <span class="format">${data.inv_make}</span></p>`
+  details += `<p class="details"><span class="para">Model</span>: <span class="format">${data.inv_model}</span></p>`
+  details += `<p class="details"><span class="para">Year</span>: <span class="format">${data.inv_year}</span></p>`
+  details += `<p class="details"><span class="para">Price</span>: <span class="format">${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(data.inv_price)}</span></p>`
+  details += `<p class="details"><span class="para">Mileage</span>: <span class="format">${new Intl.NumberFormat('en-US').format(data.inv_miles)}</span></p>`
+  details += `<p class="details"><span class="para">Color</span>: <span class="format">${data.inv_color}</span></p>`
+  details += `</div>`
+  
+  details += `</div>`
+  
+  return details 
+ }
+
  /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
