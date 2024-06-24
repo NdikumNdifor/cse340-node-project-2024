@@ -89,10 +89,10 @@ Util.buildClassificationGrid = async function(data){
     <div class="form-container">
       <form>
           <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required>
+          <input type="email" id="email" name="account_email" required>
           <br>
           <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required>
+          <input type="password" id="password" name="account_password" required>
           <br>
           <button type="submit">Login</button>
       </form>
