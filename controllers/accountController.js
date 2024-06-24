@@ -6,11 +6,11 @@ const utilities = require("../utilities/")
 * *************************************** */
 async function buildLogin(req, res, next) {
     let nav = await utilities.getNav()
-    const loginForm = utilities.buildLoginForm()
+    // const loginForm = utilities.buildLoginForm()
     res.render("account/login", {
       title: "Login",
-      nav,
-      loginForm
+      nav
+      // loginForm
     })
   }
 
@@ -19,11 +19,11 @@ async function buildLogin(req, res, next) {
 * *************************************** */
 async function buildRegister(req, res, next) {
   let nav = await utilities.getNav()
-  const registerForm = utilities.buildRegistrationForm()
+  // const registerForm = utilities.buildRegistrationForm()
   res.render("account/register", {
     title: "Register",
-    nav,
-    registerForm
+    nav
+    // registerForm
   })
 }
   

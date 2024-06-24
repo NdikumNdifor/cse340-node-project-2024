@@ -90,45 +90,45 @@ Util.buildClassificationGrid = async function(data){
 /* **************************************
 * Build the Login view HTML
 * ************************************ */
- Util.buildLoginForm = function(){
-  return `
-    <div class="form-container">
-      <form>
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="account_email" required>
-          <br>
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="account_password" required>
-          <br>
-          <button type="submit">Login</button>
-      </form>
-      <p>No account?<a href="/account/register">Sign-up</a>
-    </div>`
- }
+//  Util.buildLoginForm = function(){
+//   return `
+//     <div class="form-container">
+//       <form>
+//           <label for="email">Email:</label>
+//           <input type="email" id="email" name="account_email" required>
+//           <br>
+//           <label for="password">Password:</label>
+//           <input type="password" id="password" name="account_password" required>
+//           <br>
+//           <button type="submit">Login</button>
+//       </form>
+//       <p>No account?<a href="/account/register">Sign-up</a>
+//     </div>`
+//  }
 
 /* **************************************
 * Build the Register view HTML
 * ************************************ */
- Util.buildRegistrationForm = function() {
-  return `
-    <div id="registerForm">
-        <form>
-            <label for="first-name">First Name</label>
-            <input type="text" id="first-name" name="account_firstName" required>
-            <br>
-            <label for="last-name">Last Name</label>
-            <input type="text" id="last-name" name="account_lastName" required>
-            <br>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="account_email" required>
-            <br>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="account_password" required>
-            <br>
-            <button type="submit">Register</button>
-        </form>
-    </div>`;
-};
+//  Util.buildRegistrationForm = function() {
+//   return `
+//     <div id="registerForm">
+//         <form>
+//             <label for="first-name">First Name</label>
+//             <input type="text" id="first-name" name="account_firstName" required>
+//             <br>
+//             <label for="last-name">Last Name</label>
+//             <input type="text" id="last-name" name="account_lastName" required>
+//             <br>
+//             <label for="email">Email</label>
+//             <input type="email" id="email" name="account_email" required>
+//             <br>
+//             <label for="password">Password</label>
+//             <input type="password" id="password" name="account_password" required>
+//             <br>
+//             <button type="submit">Register</button>
+//         </form>
+//     </div>`;
+// };
 
  /* ****************************************
  * Middleware For Handling Errors
