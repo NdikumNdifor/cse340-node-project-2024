@@ -10,3 +10,7 @@ module.exports = router;
 // Route to build registration view
 router.get("/register", utilities.handleErrors(accountController.buildRegister));
 module.exports = router;
+
+//Routes for registration processing
+router.post('/register', utilities.handleErrors(accountController.registerAccount))
+module.exports = router
