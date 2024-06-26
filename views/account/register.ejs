@@ -1,6 +1,16 @@
 <% if (title) { %>
     <h1 class="main-h"><%= title %></h1>
     <%- messages() %>
+    <!-- Registration View Error Display -->
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+      <% } %>
+      <!-- ends here -->
+
     <% } else {
      res.redirect('/')
     } %>

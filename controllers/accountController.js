@@ -22,8 +22,9 @@ async function buildRegister(req, res, next) {
   // const registerForm = utilities.buildRegistrationForm()
   res.render("account/register", {
     title: "Register",
-    nav
+    nav,
     // registerForm
+    errors: null,
   })
 }
 
