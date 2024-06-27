@@ -1,0 +1,14 @@
+<% if (title) { %>
+    <h1 class="main-h"><%= title %></h1>
+    <%- messages() %>
+    <% } else {
+     res.redirect('/')
+    } %>
+
+<div id="add-classi">
+    <form action="/inventory/add-classification" method="post">
+        <label >First Name</label>
+        <input type="text" id="classificationName" name="classification_name" required>
+        <button type="submit">Add</button>
+    </form>
+</div>

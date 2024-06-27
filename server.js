@@ -76,8 +76,12 @@ app.use("/inv", itemDetailsRoute)
 
 // Account's routes
 app.use("/account", accountRoute)
+
 // Management routes
 app.use("/", managementRoute)
+
+// Add classification routes
+// app.use("/inventory", managementRoute)
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
