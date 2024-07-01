@@ -41,7 +41,7 @@ async function addNewClassification(req, res) {
       // Refresh the nav data after successfully adding a classification
       let nav = await utilities.getNav();
 
-      res.status(201).render("inventory/management", {
+      res.status(201).render("inventory/inv", {
         title: "Manage Classification",
         nav,
       })
