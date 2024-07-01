@@ -1,5 +1,5 @@
 const utilities = require("../utilities/")
-// const addClassificationModel = require("../addClassification")
+const addClassificationModel = require("../models/management-model")
 
 async function buildManagement(req, res){
   let nav = await utilities.getNav()
@@ -17,6 +17,7 @@ async function buildClassificationForm(req, res){
   res.render("inventory/add-classification", {
     title: "Add Classification", 
     nav,
+    errors: null,
  })
 }
 
@@ -25,32 +26,33 @@ async function buildClassificationForm(req, res){
 /* ****************************************
 *  Process classification entery
 * *************************************** */
-// async function AddNewClassification(req, res) {
-//     let nav = await utilities.getNav()
-//     const {classification_name} = req.body
+async function addNewClassification(req, res) {
+    // let nav = await utilities.getNav()
+    const {classification_name} = req.body
   
-//     const regResult = await addClassificationModel.AddClassification(
-//       classification_name,
-
-//     )
+    const regResult = await addClassificationModel.addClassification(classification_name)
   
-//     if (regResult) {
-//       req.flash(
-//         "notice",
-//         `You have successfuly entered ${classification_name} as a classification.`
-//       )
-//       res.status(201).render("inventory/management", {
-//         title: "Add New Classificatio",
-//         nav,
-//       })
-//     } else {
-//       req.flash("notice", "Sorry, the operation failed.")
-//       res.status(501).render("inventory/add-classification", {
-//         title: "Registration",
-//         nav,
-//       })
-//     }
-//   }
+    if (regResult) {
+      req.flash(
+        "notice",
+        `You have successfuly entered ${classification_name} as a classification.`
+      )
+
+      // Refresh the nav data after successfully adding a classification
+      let nav = await utilities.getNav();
+
+      res.status(201).render("inventory/management", {
+        title: "Manage Classification",
+        nav,
+      })
+    } else {
+      req.flash("notice", "Sorry, the operation failed.")
+      res.status(501).render("inventory/add-classification", {
+        title: "Add New Classification",
+        nav,
+      })
+    }
+  }
 
 
-module.exports = {buildManagement, buildClassificationForm}
+module.exports = {buildManagement,buildClassificationForm,addNewClassification}
