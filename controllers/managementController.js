@@ -4,7 +4,7 @@ const addClassificationModel = require("../models/management-model")
 async function buildManagement(req, res){
   let nav = await utilities.getNav()
   // req.flash("notice", "This is a flash message.")
-  res.render("inventory/management", {
+  res.render("inventory/inv", {
     title: "Vehicle Management", 
     nav,
  })

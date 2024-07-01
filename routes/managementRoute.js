@@ -6,7 +6,7 @@ const utilities = require("../utilities/")
 const regValidate = require("../utilities/addClassification-validation")
 
 // Routes to management view
-router.get("/management", utilities.handleErrors(managementController.buildManagement));
+router.get("/inv", utilities.handleErrors(managementController.buildManagement));
 // module.exports = router;
 
 // Routes to Add classification view
