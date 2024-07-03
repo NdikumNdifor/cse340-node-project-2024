@@ -1,5 +1,8 @@
 const utilities = require("../utilities/")
 const addClassificationModel = require("../models/management-model")
+const insertInventoryModel = require("../models/management-model")
+
+
 
 async function buildManagement(req, res){
   let nav = await utilities.getNav()
@@ -55,4 +58,60 @@ async function addNewClassification(req, res) {
   }
 
 
-module.exports = {buildManagement,buildClassificationForm,addNewClassification}
+/* ****************************************
+* Section for building inventory form
+* *************************************** */
+async function buildInventoryForm(req, res, next) {
+  const selectList = await utilities.buildClassificationList()
+  let nav = await utilities.getNav()
+  // const registerForm = utilities.buildRegistrationForm()
+  res.render("inventory/add-inventory", {
+    title: "Add New Inventory",
+    nav,
+    selectList,
+    errors: null,
+  })
+}
+  
+  
+  /* ****************************************
+  *  Process Registration
+  * *************************************** */
+  async function insertInventory(req, res) {
+    let nav = await utilities.getNav()
+    const {inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id  } = req.body
+    const inv_image_decoded = decodeURI(inv_image)
+    const inv_image_thumbnail = decodeURI(inv_thumbnail)
+    const regResult = await insertInventoryModel.insertInventory(
+        inv_make, 
+        inv_model, 
+        inv_year, 
+        inv_description, 
+        inv_image_decoded, 
+        inv_image_thumbnail, 
+        inv_price, 
+        inv_miles, 
+        inv_color, 
+        classification_id
+    )
+  
+    if (regResult) {
+      req.flash(
+        "notice",
+        `Congratulations, you successfully added ${inv_make} to the inventory.`
+      )
+      res.status(201).render("inventory/inv", {
+        title: "Manage Inventory",
+        nav,
+      })
+    } else {
+      req.flash("notice", `Sorry, there was an error in adding ${inv_make}, please try again.`)
+      res.status(501).render("inventory/add-inventory", {
+        title: "Add New Inventory",
+        nav,
+      })
+    }
+  }
+    
+
+module.exports = {buildManagement,buildClassificationForm,addNewClassification, buildInventoryForm, insertInventory}

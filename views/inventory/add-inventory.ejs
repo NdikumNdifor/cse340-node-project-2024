@@ -1,0 +1,63 @@
+<% if (title) { %>
+    <h1 class="main-h"><%= title %></h1>
+    <%# messages() %>
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+      <% } %>
+
+    <% } else {
+     res.redirect('/')
+    } %>
+
+<div id="inv-container" >
+    <form action="/inventory/add-inventory" method="post">
+        <br>
+        <label>Make</label>
+        <input type="text" id="make" name="inv_make" minlength="3" required placeholder="Min of 3 characters">
+        <br>
+
+        <label>Model</label>
+        <input type="text" id="model" name="inv_model" minlength="3" required placeholder="Min of 3 characters">
+        <br>
+
+        <label>Description</label>
+        <textarea id="description" name="inv_description" required></textarea>
+        <br>
+
+        <label>Image Path</label>
+        <input type="text" id="make" name="inv_image" pattern="^[a-z0-9\/.]+$" required>
+        <br>
+
+        <label>Thumnail Path</label>
+        <input type="text" id="thumnail" name="inv_thumbnail" pattern="^[a-z0-9\/.]+$" required>
+        <br>
+
+        <label>Price</label>
+        <input type="number" id="price" name="inv_price" min="0" step="0.01" required>
+        <br>
+
+        <label>Year</label>
+        <input type="text" id="year" name="inv_year" pattern="^\d{4}$" required>
+        <br>
+
+        <label>Miles</label>
+        <input type="number" id="miles" name="inv_miles" required>
+        <br>
+
+        <label>Color</label>
+        <input type="text" id="color" name="inv_color" required>
+        <br>
+
+        <%- selectList %>
+
+        <!-- <label>Classification ID</label>
+        <input type="number" id="classificationID" name="classification_id" min="1" step="1" required>
+        <br> -->
+        
+        <button type="submit">Add to invebtory</button>
+    </form>
+</div>
