@@ -1,6 +1,11 @@
 <% if (title) { %>
     <h1 class="main-h"><%= title %></h1>
     <%- messages() %>
+
+    <!-- Registration View Error Display -->
+    
+    <!-- ends here -->
+
     <% } else {
      res.redirect('/')
     } %>
@@ -8,9 +13,9 @@
 <%# loginForm %>
 
 <div id="loginForm">
-    <form>
+    <form action="/account/login" method="post">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="account_email" required>
+        <input type="email" id="email" name="account_email" required value="<%= locals.account_email %>">
         <br>
         <div id="pswd-register">
             <br>
