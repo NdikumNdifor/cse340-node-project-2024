@@ -18,10 +18,13 @@ const inventoryRoute = require("./routes/inventoryRoute")
 const itemDetailsRoute = require("./routes/itemDetailsRoute")
 const accountRoute = require("./routes/accountRoute")
 const managementRoute = require("./routes/managementRoute")
+const intentionalErrorRoute = require("./routes/intentionalErrorRoute")
 const utilities = require("./utilities/")
 // Calling body parser into scope
 const bodyParser = require("body-parser")
 // end
+//Calling the cookie parser to bring it to scope
+const cookieParser = require("cookie-parser")
 const app = express()
 const static = require("./routes/static")
 
@@ -74,19 +77,29 @@ app.use("/inv", inventoryRoute)
 // Item details routes
 app.use("/inv", itemDetailsRoute)
 
+// Error routes
+app.use("/errors", intentionalErrorRoute)
+
 // Account's routes
 app.use("/account", accountRoute)
+
+// Account after succesful login
+// app.use("/account", accountRoute)
 
 // Management routes
 app.use("/", managementRoute)
 
-// Add classification routes
-// app.use("/inventory", managementRoute)
+// will allow the cookie parser to be
+// implemented throughout the project.
+app.use(cookieParser())
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
  })
+
+// JWT mildware
+// app.use(utilities.checkJWTToken)
 
 /* ***********************
 * Express Error Handler
