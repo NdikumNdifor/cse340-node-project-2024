@@ -1,30 +1,35 @@
 <% if (title) { %>
     <h1 class="main-h"><%= title %></h1>
     <%- messages() %>
-
-    <!-- Registration View Error Display -->
-    
-    <!-- ends here -->
+    <!-- Potential Login Error Display -->
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+      <% } %>
+      <!-- ends here -->
 
     <% } else {
      res.redirect('/')
     } %>
-
 <%# loginForm %>
 
 <div id="loginForm">
     <form action="/account/login" method="post">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="account_email" required value="<%= locals.account_email %>">
-        <br>
-        <div id="pswd-register">
-            <br>
-            <label for="accountPassword">Password:</label> 
-            <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span> 
-            <input type="password" name="account_password" id="accountPassword" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
-        </div>
-        <br>
-        <button type="submit">Login</button>
+        <label class="top">Email:
+            <input type="email" id="email" name="account_email" required value="<%= locals.account_email %>">
+        </label>
+        
+        <!-- <div id="pswd-register">
+            <br> -->
+            <label class="top">Password:
+                <span class="requirement">Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span> 
+                <input type="password" name="account_password" id="accountPassword" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+            </label> 
+        <!-- </div> -->
+        <input type="submit" value="Login" class="submitBtn">
     </form>
     <p>No account?<a href="/account/register">Sign-up</a>
 </div>

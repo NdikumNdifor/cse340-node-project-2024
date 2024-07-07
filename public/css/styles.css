@@ -255,6 +255,58 @@ footer {
   font-size: 1.2rem;
 }
 
+/********** STYLING FOR FORMS *********************/
+input, textarea, button {
+  display: block;
+  padding: 12px;
+}
+
+form input.submitBtn {
+  border: none;
+  background-color: black;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 1rem;
+  margin: 1rem 0 2rem 0;
+  width: 96%;
+  max-width: 20rem;
+}
+
+form label.top {
+  display: block;
+  padding-top: 1rem;
+  font-size: 0.8rem;
+}
+
+form label.top input, #classificationList {
+  display: block;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid navy;
+  padding: 0.75rem;
+  width: 100%;
+  max-width: 20rem ;
+}
+
+#classificationList {
+  margin: 2rem 0;
+}
+
+form div  {
+  margin: 2rem 2% 0 2% ;
+}
+
+textarea  {
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 70%;
+  border: 1px solid navy;
+  font-size: 16px;
+}
+
+
+
 
 @media (min-width: 500px){
   .main-grid {
