@@ -1,4 +1,7 @@
 const invModel = require("../models/inventory-model")
+// Requiring needed packages
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 const Util = {}
 
 /* ************************
@@ -67,9 +70,9 @@ Util.buildClassificationGrid = async function(data){
   details += `</div>`
 
   details += `<div id="prominent">`
-  details += `<div id="mileage-container"><span class="para">MILEAGE</span><span class="format">${new Intl.NumberFormat('en-US').format(data.inv_miles)}</span></p></div>`
-  details += `<h3 id="heading">Sale Price</h3>`
-  details += `<h3 id="heading">${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(data.inv_price)}</h3>`
+  details += `<div id="mileage-container"><span class="para">MILEAGE</span><span class="format">${new Intl.NumberFormat('en-US').format(data.inv_miles)}</span></div>`
+  details += `<h3>Sale Price</h3>`
+  details += `<h3>${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(data.inv_price)}</h3>`
   details += `</div>`
   
 
@@ -108,8 +111,44 @@ Util.buildClassificationGrid = async function(data){
     return classificationList
   }
  
-
  Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
+ /* ****************************************
+* Middleware to check token validity
+**************************************** */
+Util.checkJWTToken = (req, res, next) => {
+  if (req.cookies.jwt) {
+   jwt.verify(
+    req.cookies.jwt,
+    process.env.ACCESS_TOKEN_SECRET,
+    function (err, accountData) {
+     if (err) {
+      req.flash("Please log in")
+      res.clearCookie("jwt")
+      return res.redirect("/account/login")
+     }
+     res.locals.accountData = accountData
+     res.locals.loggedin = 1
+     next()
+    })
+  } else {
+   next()
+  }
+ }
+
+
+ /* ****************************************
+ *  Check Login (Authorization)
+ * ************************************ */
+ Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next()
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+ }
+
  
  module.exports = Util
 
