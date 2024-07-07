@@ -157,6 +157,10 @@ footer {
   margin-top: 1rem;
 }
 
+.error-link a {
+  color: #fff;
+}
+
 /* ul {
   padding: 0.8rem 0 0 1.1rem; 
 } */
@@ -368,7 +372,7 @@ div#car-details {
 }
 
 div.main-h {
-  margin-top: rem ;
+  /* margin-top: rem ; */
   text-align: left;
 }
 
@@ -377,9 +381,3 @@ div#h2-container {
 }
 
 }
-
-
-
-
-
-
