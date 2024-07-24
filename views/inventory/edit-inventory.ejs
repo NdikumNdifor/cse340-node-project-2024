@@ -1,0 +1,69 @@
+<% if (title) { %>
+    <h1 class="main-h"><%= title %></h1>
+    <%# messages() %>
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+      <% } %>
+
+    <% } else {
+     res.redirect('/')
+    } %>
+
+<div id="inv-container" >
+    <form action="/inv/update/" method="post" id="updateForm">
+        <br>
+        <label class="top">Make:
+            <input type="text" id="make" name="inv_make" minlength="3" required placeholder="Min of 3 characters" value="<%= locals.inv_make %>">
+        </label>
+
+        <label class="top">Model:
+            <input type="text" id="model" name="inv_model" minlength="3" required placeholder="Min of 3 characters" value="<%= locals.inv_model %>">
+        </label>
+
+        <!-- The syntax for the <textarea> element is slightly different from 
+        other input elements because <textarea> does not use the value 
+        attribute to set its content. Instead, the text content of the <textarea> 
+        is placed between the opening and closing tags. -->
+        <label class="top">Description:
+            <textarea id="description" name="inv_description" required><%= locals.inv_description %></textarea> 
+        </label>
+
+        <label class="top">Image Path*
+            <input type="text" id="image" name="inv_image" pattern="^[a-z0-9\/.-]+$" required value="<%= locals.inv_image %>">
+        </label>
+
+        <label class="top">Thumnail Path*
+            <input type="text" id="thumbnail" name="inv_thumbnail" pattern="^[a-z0-9\/.-]+$" required value="<%= locals.inv_thumbnail %>">
+        </label>
+
+        <label class="top">Price*
+            <input type="number" id="price" name="inv_price" min="0" step="0.01" required value="<%= locals.inv_price %>">
+        </label>
+
+        <label class="top">Year*
+            <input type="text" id="year" name="inv_year" pattern="^\d{4}$" required value="<%= locals.inv_year %>">
+        </label>
+
+        <label class="top">Miles*
+            <input type="number" id="miles" name="inv_miles" required value="<%= locals.inv_miles %>">
+        </label>
+
+        <label class="top">Color*
+            <input type="text" id="color" name="inv_color" required value="<%= locals.inv_color %>">
+        </label>
+
+        <%- classificationSelect %>
+
+        <input type="submit" value="Update Vehicle" class="submitBtn" id="button" disabled>
+
+        <input type="hidden" name="inv_id"
+        <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+        <% } %>>
+    </form>
+</div>
+
+<script src="../../js/inv-update.js"></script>
