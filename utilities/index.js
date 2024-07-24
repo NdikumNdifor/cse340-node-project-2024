@@ -138,18 +138,18 @@ Util.checkJWTToken = (req, res, next) => {
  }
 
 
-//  /* ****************************************
-//  *  Check Login (Authorization)
-//  * ************************************ */
-//  Util.checkLogin = (req, res, next) => {
-//   console.log("loggedin is", res.locals.loggedin)
-//   if (res.locals.loggedin) {
-//     next()
-//   } else {
-//     req.flash("notice", "Please log in.")
-//     return res.redirect("/account/login")
-//   }
-//  }
+ /* ****************************************
+ *  Check Login (Authorization)
+ * ************************************ */
+ Util.checkLogin = (req, res, next) => {
+  console.log("loggedin is", res.locals.loggedin)
+  if (res.locals.loggedin) {
+    next()
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+ }
 
  
  
