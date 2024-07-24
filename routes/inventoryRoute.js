@@ -16,21 +16,21 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invControl
 // Route that matches the path and 
 // parameter to the end of the route to represent
 // the inventory_id value that will be passed in through the URL
-// router.get("/edit/:inv_id", utilities.checkIfAdminOrEmployee, utilities.handleErrors(invController.buildEditClassificationListItemsByIdView))
+router.get("/edit/:inv_id", utilities.checkIfAdminOrEmployee, utilities.handleErrors(invController.buildEditClassificationListItemsByIdView))
 
-// // Route for update view.
-// router.post("/update/",  
-//     regValidate.addUpdateRules(),
-//     regValidate.checkUpdateData,
-//     utilities.checkIfAdminOrEmployee, 
-//     utilities.handleErrors(invController.updateInventory))
+// Route for update view.
+router.post("/update/",  
+    regValidate.addUpdateRules(),
+    regValidate.checkUpdateData,
+    utilities.checkIfAdminOrEmployee, 
+    utilities.handleErrors(invController.updateInventory))
 
-// // Route for delete action.
-// router.get("/delete/:inv_id", utilities.checkIfAdminOrEmployee, utilities.handleErrors(invController.buildDeleteConfirmationView))
+// Route for delete action.
+router.get("/delete/:inv_id", utilities.checkIfAdminOrEmployee, utilities.handleErrors(invController.buildDeleteConfirmationView))
 
-// // Route for processing delete option.
-// router.post("/delete/",  // No need for validation rules here, we are just retrieving and deleting data.
-//     utilities.checkIfAdminOrEmployee,
-//     utilities.handleErrors(invController.deleteItemProcessing))
+// Route for processing delete option.
+router.post("/delete/",  // No need for validation rules here, we are just retrieving and deleting data.
+    utilities.checkIfAdminOrEmployee,
+    utilities.handleErrors(invController.deleteItemProcessing))
 
 module.exports = router;
