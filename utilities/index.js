@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const finalModel = require("../models/final-model")
 // Requiring needed packages
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -137,68 +138,193 @@ Util.checkJWTToken = (req, res, next) => {
  }
 
 
- /* ****************************************
- *  Check Login (Authorization)
- * ************************************ */
- Util.checkLogin = (req, res, next) => {
-  if (res.locals.loggedin) {
-    next()
-  } else {
-    req.flash("notice", "Please log in.")
-    return res.redirect("/account/login")
-  }
- }
-
- 
- module.exports = Util
-
-
-
-/* **************************************
-* Build the Login view HTML
-* ************************************ */
-//  Util.buildLoginForm = function(){
-//   return `
-//     <div class="form-container">
-//       <form>
-//           <label for="email">Email:</label>
-//           <input type="email" id="email" name="account_email" required>
-//           <br>
-//           <label for="password">Password:</label>
-//           <input type="password" id="password" name="account_password" required>
-//           <br>
-//           <button type="submit">Login</button>
-//       </form>
-//       <p>No account?<a href="/account/register">Sign-up</a>
-//     </div>`
+//  /* ****************************************
+//  *  Check Login (Authorization)
+//  * ************************************ */
+//  Util.checkLogin = (req, res, next) => {
+//   console.log("loggedin is", res.locals.loggedin)
+//   if (res.locals.loggedin) {
+//     next()
+//   } else {
+//     req.flash("notice", "Please log in.")
+//     return res.redirect("/account/login")
+//   }
 //  }
 
-/* **************************************
-* Build the Register view HTML
-* ************************************ */
-//  Util.buildRegistrationForm = function() {
-//   return `
-//     <div id="registerForm">
-//         <form>
-//             <label for="first-name">First Name</label>
-//             <input type="text" id="first-name" name="account_firstName" required>
-//             <br>
-//             <label for="last-name">Last Name</label>
-//             <input type="text" id="last-name" name="account_lastName" required>
-//             <br>
-//             <label for="email">Email</label>
-//             <input type="email" id="email" name="account_email" required>
-//             <br>
-//             <label for="password">Password</label>
-//             <input type="password" id="password" name="account_password" required>
-//             <br>
-//             <button type="submit">Register</button>
-//         </form>
-//     </div>`;
+ 
+ 
+
+
+
+// /* ****************************************
+//  *  FINAL PROJECT
+//  * ************************************ */
+
+// Util.getCategoryNavigation = async function () {
+//     let data = await finalModel.getCategory()
+//     let list = "<ul>"
+//     data.rows.forEach((row) => {
+//       list += `
+//         <li>
+//           <a href="/product/types/${row.category_id}" title="See our category ${row.category_name} vehicles">
+//             ${row.category_name}
+//           </a>
+//         </li>
+//       `
+//     });
+//     list += "</ul>"
+//     return list
+//   } 
+
+
+// Util.buildTypeGrid = async function(data) {
+//   let grid;
+//   if (data.length > 0) {
+//     grid = '<ul id="type-display">';
+//     data.forEach(type => {
+//       grid += `
+//         <li>
+//           <a href="../../product/items/${type.type_id}" title="View ${type.type_name} details">
+//             <img src="${type.type_image}" alt="Image of ${type.type_name} on CSE Motors" />
+//           </a>
+//         </li>
+//       `;
+//     });
+//     grid += '</ul>';
+//   } else {
+//     grid = '<p class="notice">Sorry, no matching types could be found.</p>';
+//   }
+//   return grid;
+// }
+
+// Util.buildProductGrid = async function(data) {
+//   let grid;
+//   if (data.length > 0) {
+//     grid = '<ul id="inv-display">';
+//     data.forEach(product => {
+//       grid += `
+//         <li>
+//           <a href="../../product/details/${product.product_id}" title="View ${product.product_name}">
+//             <img src="${product.product_image}" alt="Image of ${product.product_name} on CSE Motors" />
+//           </a>
+//           <div class="namePrice">
+//             <hr />
+//             <h2>
+//               <a href="../../product/details/${product.product_id}" title="View ${product.product_name}">
+//                 ${product.product_name} 
+//               </a>
+//             </h2>
+//             <span>$${new Intl.NumberFormat('en-US').format(product.product_price)}</span>
+//           </div>
+//         </li>
+//       `;
+//     });
+//     grid += '</ul>';
+//   } else {
+//     grid = '<p class="notice">Sorry, no matching vehicles could be found.</p>';
+//   }
+//   return grid;
+// }
+
+
+// /* **************************************
+// * Build the Details view HTML For products
+// * ************************************ */
+// Util.buildProductDetails = async function(product){
+//   let details
+//   details = `<div id="detail-grid">`
+
+//   details += `<div id="img-container">`
+//   details += `<img src="${product.product_image}" alt="${product.product_name} car">`
+//   details += `</div>`
+
+//   details += `<div id="h2-container">`
+//   details += `<h2 id="heading">${product.product_name} ${product.product_model}</h2>`
+//   details += `</div>`
+
+//   details += `<div id="prod-details">`
+//   details += `<p class="details"><span class="para">Make</span>: <span class="format">${product.product_name}</span></p>`
+//   details += `<p class="details"><span class="para">Price</span>: <span class="format">${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.product_price)}</span></p>`
+//   details += `<p class="details"><span class="para">Year</span>: <span class="format">${product.product_description}</span></p>`
+//   details += `</div>`
+  
+//   details += `</div>`
+  
+//   return details 
+//  }
+
+
+// /* ****************************************
+//  *  Check Login (Authorization Middleware)
+//  * ************************************ */
+// Util.checkIfAdminOrEmployee = (req, res, next) => {
+//   if (req.cookies.jwt) {
+//     jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET, (err, accountData) => {
+//       if (err) {
+//         req.flash("notice", "Please log in");
+//         res.clearCookie('jwt');
+//         console.log("Cookies doesn't exist!")
+//         return res.redirect('/account/login');
+//       }
+
+//       if (accountData.account_type === 'Employee' || accountData.account_type === 'Admin') {
+//         console.log("notice", "Successfuly Checked if Admin or Employee!")
+//         res.locals.accountData = accountData;
+//         next();
+//       } else {
+//         req.flash("notice", "You do not have permission to access this resource");
+//         console.log("This account can't acces this enviroment!")
+//         res.redirect('/account/login');
+//       }
+//     });
+//   } else {
+//     req.flash("notice", "Please log in");
+//     console.log("Sorry, I didn't find any cookies, you will have to log in !")
+//     res.redirect('/account/login');
+//   }
 // };
 
- /* ****************************************
- * Middleware For Handling Errors
- * Wrap other function in this for 
- * General Error Handling
- **************************************** */
+// Util.checkIfAdminOrEmployee = (req, res, next) => {
+//   // Check if the JWT cookie exists
+//   if (req.cookies.jwt) {
+//     // Verify the JWT token
+//     jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET, (err, accountData) => {
+//       if (err) {
+//         req.flash("Please log in");
+//         res.clearCookie('jwt');
+//         return res.redirect('/account/login');
+//       }
+
+//       // Check account type
+//       if (accountData.account_type === 'Employee' || accountData.account_type === 'Admin') {
+//         // Store account data in response locals
+//         res.locals.accountData = accountData;
+//         next();
+//       } else {
+//         req.flash("You do not have permission to access this resource");
+//         res.redirect('/account/login');
+//       }
+//     });
+//   } else {
+//     req.flash("Please log in");
+//     res.redirect('/account/login');
+//   }
+// };
+// Util.checkIfAdminOrEmployee = (req, res, next) => {
+//   const accountData = res.locals.accountData;
+//   if (!accountData) {
+//     req.flash("You must be logged in to view this page");
+//     return res.redirect("/account/login");
+//   }
+
+//   const accountType = accountData.account_type
+//   if (accountType === 'Admin' || accountType === 'Employee') {
+//     return next();
+//   }
+
+//   req.flash("You do not have permission to view this page");
+//   return res.redirect("/account/login");
+// };
+
+
+module.exports = Util

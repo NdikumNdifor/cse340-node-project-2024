@@ -19,6 +19,7 @@ const itemDetailsRoute = require("./routes/itemDetailsRoute")
 const accountRoute = require("./routes/accountRoute")
 const managementRoute = require("./routes/managementRoute")
 const intentionalErrorRoute = require("./routes/intentionalErrorRoute")
+const finalProjectRoute = require("./routes/finalRoute")
 const utilities = require("./utilities/")
 // Calling body parser into scope
 const bodyParser = require("body-parser")
@@ -53,6 +54,15 @@ app.use(function(req, res, next){
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
+
+// will allow the cookie parser to be
+// implemented throughout the project.
+app.use(cookieParser())
+
+// JWT mildware
+// app.use(utilities.checkJWTToken)
+
+
 /* ***********************
  * View Engine and Template
  *************************/
@@ -74,6 +84,10 @@ app.get("/", utilities.handleErrors(baseController.buildHome)
 // Inventory routes
 app.use("/inv", inventoryRoute)
 
+// inv.ejs routes
+app.use("/", inventoryRoute)
+
+
 // Item details routes
 app.use("/inv", itemDetailsRoute)
 
@@ -89,9 +103,14 @@ app.use("/account", accountRoute)
 // Management routes
 app.use("/", managementRoute)
 
-// will allow the cookie parser to be
-// implemented throughout the project.
-app.use(cookieParser())
+// Final Project Routes
+app.use("/product", finalProjectRoute)
+
+// inventory/inv.ejs management route
+// inv.ejs routes
+app.use("/inventory", inventoryRoute)
+
+
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
@@ -99,7 +118,7 @@ app.use(async (req, res, next) => {
  })
 
 // JWT mildware
-// app.use(utilities.checkJWTToken)
+app.use(utilities.checkJWTToken)
 
 /* ***********************
 * Express Error Handler
@@ -107,12 +126,14 @@ app.use(async (req, res, next) => {
 *************************/
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
+  let finalNav = await utilities.getCategoryNavigation()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
   if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
   res.render("errors/error", {
     title: err.status || 'Server Error',
     message,
-    nav
+    nav,
+    finalNav
   })
 })
 
@@ -129,5 +150,3 @@ const host = process.env.HOST
 app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
-
-
