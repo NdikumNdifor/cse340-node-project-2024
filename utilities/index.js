@@ -156,133 +156,133 @@ Util.checkJWTToken = (req, res, next) => {
 
 
 
-// /* ****************************************
-//  *  FINAL PROJECT
-//  * ************************************ */
+/* ****************************************
+ *  FINAL PROJECT
+ * ************************************ */
 
-// Util.getCategoryNavigation = async function () {
-//     let data = await finalModel.getCategory()
-//     let list = "<ul>"
-//     data.rows.forEach((row) => {
-//       list += `
-//         <li>
-//           <a href="/product/types/${row.category_id}" title="See our category ${row.category_name} vehicles">
-//             ${row.category_name}
-//           </a>
-//         </li>
-//       `
-//     });
-//     list += "</ul>"
-//     return list
-//   } 
-
-
-// Util.buildTypeGrid = async function(data) {
-//   let grid;
-//   if (data.length > 0) {
-//     grid = '<ul id="type-display">';
-//     data.forEach(type => {
-//       grid += `
-//         <li>
-//           <a href="../../product/items/${type.type_id}" title="View ${type.type_name} details">
-//             <img src="${type.type_image}" alt="Image of ${type.type_name} on CSE Motors" />
-//           </a>
-//         </li>
-//       `;
-//     });
-//     grid += '</ul>';
-//   } else {
-//     grid = '<p class="notice">Sorry, no matching types could be found.</p>';
-//   }
-//   return grid;
-// }
-
-// Util.buildProductGrid = async function(data) {
-//   let grid;
-//   if (data.length > 0) {
-//     grid = '<ul id="inv-display">';
-//     data.forEach(product => {
-//       grid += `
-//         <li>
-//           <a href="../../product/details/${product.product_id}" title="View ${product.product_name}">
-//             <img src="${product.product_image}" alt="Image of ${product.product_name} on CSE Motors" />
-//           </a>
-//           <div class="namePrice">
-//             <hr />
-//             <h2>
-//               <a href="../../product/details/${product.product_id}" title="View ${product.product_name}">
-//                 ${product.product_name} 
-//               </a>
-//             </h2>
-//             <span>$${new Intl.NumberFormat('en-US').format(product.product_price)}</span>
-//           </div>
-//         </li>
-//       `;
-//     });
-//     grid += '</ul>';
-//   } else {
-//     grid = '<p class="notice">Sorry, no matching vehicles could be found.</p>';
-//   }
-//   return grid;
-// }
+Util.getCategoryNavigation = async function () {
+    let data = await finalModel.getCategory()
+    let list = "<ul>"
+    data.rows.forEach((row) => {
+      list += `
+        <li>
+          <a href="/product/types/${row.category_id}" title="See our category ${row.category_name} vehicles">
+            ${row.category_name}
+          </a>
+        </li>
+      `
+    });
+    list += "</ul>"
+    return list
+  } 
 
 
-// /* **************************************
-// * Build the Details view HTML For products
-// * ************************************ */
-// Util.buildProductDetails = async function(product){
-//   let details
-//   details = `<div id="detail-grid">`
+Util.buildTypeGrid = async function(data) {
+  let grid;
+  if (data.length > 0) {
+    grid = '<ul id="type-display">';
+    data.forEach(type => {
+      grid += `
+        <li>
+          <a href="../../product/items/${type.type_id}" title="View ${type.type_name} details">
+            <img src="${type.type_image}" alt="Image of ${type.type_name} on CSE Motors" />
+          </a>
+        </li>
+      `;
+    });
+    grid += '</ul>';
+  } else {
+    grid = '<p class="notice">Sorry, no matching types could be found.</p>';
+  }
+  return grid;
+}
 
-//   details += `<div id="img-container">`
-//   details += `<img src="${product.product_image}" alt="${product.product_name} car">`
-//   details += `</div>`
+Util.buildProductGrid = async function(data) {
+  let grid;
+  if (data.length > 0) {
+    grid = '<ul id="inv-display">';
+    data.forEach(product => {
+      grid += `
+        <li>
+          <a href="../../product/details/${product.product_id}" title="View ${product.product_name}">
+            <img src="${product.product_image}" alt="Image of ${product.product_name} on CSE Motors" />
+          </a>
+          <div class="namePrice">
+            <hr />
+            <h2>
+              <a href="../../product/details/${product.product_id}" title="View ${product.product_name}">
+                ${product.product_name} 
+              </a>
+            </h2>
+            <span>$${new Intl.NumberFormat('en-US').format(product.product_price)}</span>
+          </div>
+        </li>
+      `;
+    });
+    grid += '</ul>';
+  } else {
+    grid = '<p class="notice">Sorry, no matching vehicles could be found.</p>';
+  }
+  return grid;
+}
 
-//   details += `<div id="h2-container">`
-//   details += `<h2 id="heading">${product.product_name} ${product.product_model}</h2>`
-//   details += `</div>`
 
-//   details += `<div id="prod-details">`
-//   details += `<p class="details"><span class="para">Make</span>: <span class="format">${product.product_name}</span></p>`
-//   details += `<p class="details"><span class="para">Price</span>: <span class="format">${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.product_price)}</span></p>`
-//   details += `<p class="details"><span class="para">Year</span>: <span class="format">${product.product_description}</span></p>`
-//   details += `</div>`
+/* **************************************
+* Build the Details view HTML For products
+* ************************************ */
+Util.buildProductDetails = async function(product){
+  let details
+  details = `<div id="detail-grid">`
+
+  details += `<div id="img-container">`
+  details += `<img src="${product.product_image}" alt="${product.product_name} car">`
+  details += `</div>`
+
+  details += `<div id="h2-container">`
+  details += `<h2 id="heading">${product.product_name} ${product.product_model}</h2>`
+  details += `</div>`
+
+  details += `<div id="prod-details">`
+  details += `<p class="details"><span class="para">Make</span>: <span class="format">${product.product_name}</span></p>`
+  details += `<p class="details"><span class="para">Price</span>: <span class="format">${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.product_price)}</span></p>`
+  details += `<p class="details"><span class="para">Year</span>: <span class="format">${product.product_description}</span></p>`
+  details += `</div>`
   
-//   details += `</div>`
+  details += `</div>`
   
-//   return details 
-//  }
+  return details 
+ }
 
 
-// /* ****************************************
-//  *  Check Login (Authorization Middleware)
-//  * ************************************ */
-// Util.checkIfAdminOrEmployee = (req, res, next) => {
-//   if (req.cookies.jwt) {
-//     jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET, (err, accountData) => {
-//       if (err) {
-//         req.flash("notice", "Please log in");
-//         res.clearCookie('jwt');
-//         console.log("Cookies doesn't exist!")
-//         return res.redirect('/account/login');
-//       }
+/* ****************************************
+ *  Check Login (Authorization Middleware)
+ * ************************************ */
+Util.checkIfAdminOrEmployee = (req, res, next) => {
+  if (req.cookies.jwt) {
+    jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET, (err, accountData) => {
+      if (err) {
+        req.flash("notice", "Please log in");
+        res.clearCookie('jwt');
+        console.log("Cookies doesn't exist!")
+        return res.redirect('/account/login');
+      }
 
-//       if (accountData.account_type === 'Employee' || accountData.account_type === 'Admin') {
-//         console.log("notice", "Successfuly Checked if Admin or Employee!")
-//         res.locals.accountData = accountData;
-//         next();
-//       } else {
-//         req.flash("notice", "You do not have permission to access this resource");
-//         console.log("This account can't acces this enviroment!")
-//         res.redirect('/account/login');
-//       }
-//     });
-//   } else {
-//     req.flash("notice", "Please log in");
-//     console.log("Sorry, I didn't find any cookies, you will have to log in !")
-//     res.redirect('/account/login');
-//   }
-// };
+      if (accountData.account_type === 'Employee' || accountData.account_type === 'Admin') {
+        console.log("notice", "Successfuly Checked if Admin or Employee!")
+        res.locals.accountData = accountData;
+        next();
+      } else {
+        req.flash("notice", "You do not have permission to access this resource");
+        console.log("This account can't acces this enviroment!")
+        res.redirect('/account/login');
+      }
+    });
+  } else {
+    req.flash("notice", "Please log in");
+    console.log("Sorry, I didn't find any cookies, you will have to log in !")
+    res.redirect('/account/login');
+  }
+};
 
 // Util.checkIfAdminOrEmployee = (req, res, next) => {
 //   // Check if the JWT cookie exists

@@ -36,27 +36,27 @@ router.post(
   )
 
 // After  successful login, this is the rout
-// router.get("/account-managementView", utilities.checkLogin, utilities.handleErrors(accountController.buildManagementView))
+router.get("/account-managementView", utilities.checkLogin, utilities.handleErrors(accountController.buildManagementView))
 
-// // Get view to change account information.
-// router.get("/changeAccountInfo/:account_id", utilities.handleErrors(accountController.buildChangeAccountInfoView))
+// Get view to change account information.
+router.get("/changeAccountInfo/:account_id", utilities.handleErrors(accountController.buildChangeAccountInfoView))
 
-// // Update personal account informations
-// router.post("/changeAccountInfo",
-//   regValidate.changeAccountInfoRules(),
-//   regValidate.checkAccountData, 
-//   utilities.handleErrors(accountController.UpdatePersonalInfo))
+// Update personal account informations
+router.post("/changeAccountInfo",
+  regValidate.changeAccountInfoRules(),
+  regValidate.checkAccountData, 
+  utilities.handleErrors(accountController.UpdatePersonalInfo))
 
-// router.post("/changeAccountPassword",
-//   regValidate.accountPasswordRules(),
-//   regValidate.checkAccountPasswordData, 
-//   utilities.handleErrors(accountController.updateAccountPassword))
+router.post("/changeAccountPassword",
+  regValidate.accountPasswordRules(),
+  regValidate.checkAccountPasswordData, 
+  utilities.handleErrors(accountController.updateAccountPassword))
 
-// router.get('/logout', (req, res) => {
-//   res.clearCookie('jwt');
-//   res.redirect('/');
-//   req.flash('notice', 'You have logged out successfully');
-// });
+router.get('/logout', (req, res) => {
+  res.clearCookie('jwt');
+  res.redirect('/');
+  req.flash('notice', 'You have logged out successfully');
+});
   
 
 module.exports = router

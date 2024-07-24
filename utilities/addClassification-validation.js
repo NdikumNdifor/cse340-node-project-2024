@@ -27,11 +27,13 @@ validate.checkRegData = async (req, res, next) => {
     errors = validationResult(req)
     if (!errors.isEmpty()) {
       let nav = await utilities.getNav()
+      let finalNav = await utilities.getCategoryNavigation()
       res.render("inventory/add-classification", {
         errors,
         title: "Add Classification",
         classification_name,
         nav,
+        finalNav
       })
       return
     }

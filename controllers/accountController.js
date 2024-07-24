@@ -153,146 +153,159 @@ async function accountLogin(req, res) {
   }
 }
 
-// async function buildManagementView(req, res) {
-//   let nav = await utilities.getNav();
-//   let finalNav = await utilities.getCategoryNavigation()
-//   res.render("account/account-managementView", {
-//     title: "Manage Account",
-//     nav,
-//     finalNav,
-//     errors: null,
-//   });
-// }
+async function buildManagementView(req, res) {
+  let nav = await utilities.getNav();
+  let finalNav = await utilities.getCategoryNavigation()
+  res.render("account/account-managementView", {
+    title: "Manage Account",
+    nav,
+    finalNav,
+    errors: null,
+  });
+}
 
 
-// // Retrieve account info from account table
-// // load into form for account information change.
-// async function buildChangeAccountInfoView( req, res, nex) {
-//   const account_id = parseInt(req.params.account_id);
-//   let nav = await utilities.getNav();
-//   let finalNav = await utilities.getCategoryNavigation()
-//   const itemData = await accountModel.getAccountById(account_id);
-//   console.log(itemData);
+// Retrieve account info from account table
+// load into form for account information change.
+async function buildChangeAccountInfoView( req, res, nex) {
+  const account_id = parseInt(req.params.account_id);
+  let nav = await utilities.getNav();
+  let finalNav = await utilities.getCategoryNavigation()
+  const itemData = await accountModel.getAccountById(account_id);
+  console.log(itemData);
 
-//   const itemName = `${itemData.account_firstname} ${itemData.account_lastname}'s Information`;
-//   res.render("./account/changeAccountInfo", {
-//     title: "Change " + itemName,
-//     nav,
-//     finalNav,
-//     errors: null,
-//     account_id: itemData.account_id,
-//     account_firstname: itemData.account_firstname,
-//     account_lastname: itemData.account_lastname,
-//     account_email: itemData.account_email,
-//   });
-// }
+  const itemName = `${itemData.account_firstname} ${itemData.account_lastname}'s Information`;
+  res.render("./account/changeAccountInfo", {
+    title: "Change " + itemName,
+    nav,
+    finalNav,
+    errors: null,
+    account_id: itemData.account_id,
+    account_firstname: itemData.account_firstname,
+    account_lastname: itemData.account_lastname,
+    account_email: itemData.account_email,
+  });
+}
 
 
-// /* ***************************
-//  *  Update Personal account Info
-//  * ************************** */
-// async function UpdatePersonalInfo (req, res, next) {
-//   let nav = await utilities.getNav();
-//   let finalNav = await utilities.getCategoryNavigation()
-//   const {
-//     account_firstname,
-//     account_lastname,
-//     account_email,
-//     account_id
-//   } = req.body;
-//   const updateResult = await accountModel.updateAccountInfo(
-//     account_firstname,
-//     account_lastname,
-//     account_email,
-//     account_id
-//   );
+/* ***************************
+ *  Update Personal account Info
+ * ************************** */
+async function UpdatePersonalInfo (req, res, next) {
+  let nav = await utilities.getNav();
+  let finalNav = await utilities.getCategoryNavigation()
+  const {
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id
+  } = req.body;
+  const updateResult = await accountModel.updateAccountInfo(
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_id
+  );
 
-//   if (updateResult) {
-//     const itemName = updateResult.account_firstname + " " + updateResult.account_lastname;
-//     req.flash("notice", `Congratulations, ${itemName} information was successfully updated.`);
-//     res.redirect("/account/account-managementView");
-//   } else {
-//     const itemName = `${account_firstname} ${account_lastname}`;
-//     req.flash("notice", "Sorry, the change failed.");
-//     res.status(501).render("account/changeAccountInfo", {
-//       title: "Change " + itemName,
-//       nav,
-//       finalNav,
-//       errors: null,
-//       account_firstname,
-//       account_lastname,
-//       account_email,
-//       account_id
+  if (updateResult) {
+    const itemName = updateResult.account_firstname + " " + updateResult.account_lastname;
+    req.flash("notice", `Congratulations, ${itemName} information was successfully updated.`);
+    res.redirect("/account/account-managementView");
+  } else {
+    const itemName = `${account_firstname} ${account_lastname}`;
+    req.flash("notice", "Sorry, the change failed.");
+    res.status(501).render("account/changeAccountInfo", {
+      title: "Change " + itemName,
+      nav,
+      finalNav,
+      errors: null,
+      account_firstname,
+      account_lastname,
+      account_email,
+      account_id
       
-//     });
-//   }
-// };
+    });
+  }
+};
 
 
-// // Account password change Processing
-// async function updateAccountPassword(req, res, next){
-//   let nav = await utilities.getNav();
-//   let finalNav = await utilities.getCategoryNavigation()
-//   const {
-//     account_password,
-//     account_id
-//   } = req.body;
+// Account password change Processing
+async function updateAccountPassword(req, res, next){
+  let nav = await utilities.getNav();
+  let finalNav = await utilities.getCategoryNavigation()
+  const {
+    account_password,
+    account_id
+  } = req.body;
 
-//   // Hash the password before storing
-//   let hashedPassword;
-//   try {
-//     // regular password and cost (salt is generated automatically)
-//     hashedPassword = await bcrypt.hashSync(account_password, 10);
-//   } catch (error) {
-//     req.flash(
-//       "notice",
-//       "Sorry, there was an error processing the Password Change."
-//     );
-//     return res.status(500).render("account/changeAccountInfo", {
-//       title: "Password Change Error",
-//       nav,
-//       finalNav,
-//       errors: null,
-//     });
-//   }
+  // Hash the password before storing
+  let hashedPassword;
+  try {
+    // regular password and cost (salt is generated automatically)
+    hashedPassword = await bcrypt.hashSync(account_password, 10);
+  } catch (error) {
+    req.flash(
+      "notice",
+      "Sorry, there was an error processing the Password Change."
+    );
+    return res.status(500).render("account/changeAccountInfo", {
+      title: "Password Change Error",
+      nav,
+      finalNav,
+      errors: null,
+    });
+  }
 
 
-//   const updateResult = await accountModel.updateAccountPasswordInfo(
-//     hashedPassword,
-//     account_id
+  const updateResult = await accountModel.updateAccountPasswordInfo(
+    hashedPassword,
+    account_id
     
-//   );
+  );
 
-//   if (updateResult) {
-//     const itemName = updateResult.account_firstname + " " + updateResult.account_lastname;
-//     req.flash("notice", `Congratulation, the password for ${itemName} was successfully changed.`);
-//     res.redirect("/account/account-managementView/");
-//   } else {
-//     const itemName = `${updateResult.account_firstname} ${updateResult.account_lastname}`;
-//     req.flash("notice", "Sorry, the change failed.");
-//     res.status(501).render("account/changeAccountInfo", {
-//       title: "Change " + itemName,
-//       nav,
-//       finalNav,
-//       hashedPassword,
-//       account_id
+  if (updateResult) {
+    const itemName = updateResult.account_firstname + " " + updateResult.account_lastname;
+    req.flash("notice", `Congratulation, the password for ${itemName} was successfully changed.`);
+    res.redirect("/account/account-managementView/");
+  } else {
+    const itemName = `${updateResult.account_firstname} ${updateResult.account_lastname}`;
+    req.flash("notice", "Sorry, the change failed.");
+    res.status(501).render("account/changeAccountInfo", {
+      title: "Change " + itemName,
+      nav,
+      finalNav,
+      hashedPassword,
+      account_id
       
-//     });
-//   }
+    });
+  }
 
+}
+
+
+
+
+module.exports = {
+  buildLogin,
+  buildRegister,
+  registerAccount,
+  accountLogin,
+  buildManagementView,
+  buildChangeAccountInfoView,
+  UpdatePersonalInfo,
+  updateAccountPassword
+};
+
+/* ***************************
+ * Building the login controller function
+ * ************************** */
+// const accountCont = {}
+// accountCont.buildLogin = async function(req, res, next){
+//     let nav = await utilities.getNav()
+//     res.render("account/login", {
+//       title: "Login",
+//       nav,
+//     })
 // }
 
-
-
-
-// module.exports = {
-//   buildLogin,
-//   buildRegister,
-//   registerAccount,
-//   accountLogin,
-//   buildManagementView,
-//   buildChangeAccountInfoView,
-//   UpdatePersonalInfo,
-//   updateAccountPassword
-// };
-
+// module.exports = accountCont

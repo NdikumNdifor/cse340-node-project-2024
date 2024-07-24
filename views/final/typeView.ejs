@@ -1,0 +1,8 @@
+<% if (title) { %>
+    <h1 class="main-h"><%= title %></h1>
+    <%- messages() %>
+    <% } else {
+     res.redirect('/')
+    } %>
+
+<%- typeGrid %>

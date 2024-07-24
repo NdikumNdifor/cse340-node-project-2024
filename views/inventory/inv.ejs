@@ -8,3 +8,20 @@
 <%# itemDetailsTemplate %>
 <p id="add-classification" class="add-item"><a href="/inventory/add-classification">Add New Classification</a></p>
 <p id="add-vehicles" class="add-item"><a href="/inventory/add-inventory">Add New Vehicles</a></p>
+<h2>Manage Inventory</h2>
+<p>Select a list to see the items in the list</p>
+
+<%# Display list of classification to be selected and view corresponding items %>
+<%- classificationSelect %>
+
+<%# Table to display classification items into %>
+<table id="inventoryDisplay"></table>
+
+<%# Display a message in case JavaScript is disabled. 
+If the browser detects that JavaScript is 
+disabled, it will show the <noscript> element and its contents. 
+If JavaScript is enabled the <noscript> element is hidden %>
+<noscript>JavaScript must be enabled to use this page.</noscript>
+
+<%# Hooking javaScript %>
+<script src="../../js/inventory.js"></script>

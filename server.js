@@ -60,7 +60,7 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-
 app.use(cookieParser())
 
 // JWT mildware
-// app.use(utilities.checkJWTToken)
+app.use(utilities.checkJWTToken)
 
 
 /* ***********************
