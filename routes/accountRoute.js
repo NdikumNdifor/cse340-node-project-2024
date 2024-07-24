@@ -36,7 +36,7 @@ router.post(
   )
 
 // After  successful login, this is the rout
-// router.get("/account-managementView", utilities.checkLogin, utilities.handleErrors(accountController.buildManagementView))
+router.get("/account-managementView", utilities.checkLogin, utilities.handleErrors(accountController.buildManagementView))
 
 // // Get view to change account information.
 // router.get("/changeAccountInfo/:account_id", utilities.handleErrors(accountController.buildChangeAccountInfoView))

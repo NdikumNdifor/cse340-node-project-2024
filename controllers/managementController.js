@@ -4,22 +4,23 @@ const insertInventoryModel = require("../models/management-model")
 
 
 
-async function buildManagement(req, res){
-  let nav = await utilities.getNav()
-  // req.flash("notice", "This is a flash message.")
-  res.render("inventory/inv", {
-    title: "Vehicle Management", 
-    nav,
- })
-}
+// async function buildManagement(req, res){
+//   let nav = await utilities.getNav()
+//   res.render("inventory/inv", {
+//     title: "Vehicle Management", 
+//     nav,
+//  })
+// }
 
 // Buid the classification form for receiving new classification
 async function buildClassificationForm(req, res){
   let nav = await utilities.getNav()
+  let finalNav = await utilities.getCategoryNavigation()
   // req.flash("notice", "This is a flash message.")
   res.render("inventory/add-classification", {
     title: "Add Classification", 
     nav,
+    finalNav,
     errors: null,
  })
 }
@@ -43,16 +44,19 @@ async function addNewClassification(req, res) {
 
       // Refresh the nav data after successfully adding a classification
       let nav = await utilities.getNav();
+      let finalNav = await utilities.getCategoryNavigation()
 
       res.status(201).render("inventory/inv", {
         title: "Manage Classification",
         nav,
+        finalNav
       })
     } else {
       req.flash("notice", "Sorry, the operation failed.")
       res.status(501).render("inventory/add-classification", {
         title: "Add New Classification",
         nav,
+        finalNav
       })
     }
   }
@@ -64,10 +68,12 @@ async function addNewClassification(req, res) {
 async function buildInventoryForm(req, res, next) {
   const selectList = await utilities.buildClassificationList()
   let nav = await utilities.getNav()
+  let finalNav = await utilities.getCategoryNavigation()
   // const registerForm = utilities.buildRegistrationForm()
   res.render("inventory/add-inventory", {
     title: "Add New Inventory",
     nav,
+    finalNav,
     selectList,
     errors: null,
   })
@@ -79,6 +85,7 @@ async function buildInventoryForm(req, res, next) {
   * *************************************** */
   async function insertInventory(req, res) {
     let nav = await utilities.getNav()
+    let finalNav = await utilities.getCategoryNavigation()
     const {inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id  } = req.body
     const inv_image_decoded = decodeURI(inv_image)
     const inv_image_thumbnail = decodeURI(inv_thumbnail)
@@ -103,15 +110,17 @@ async function buildInventoryForm(req, res, next) {
       res.status(201).render("inventory/inv", {
         title: "Manage Inventory",
         nav,
+        finalNav
       })
     } else {
       req.flash("notice", `Sorry, there was an error in adding ${inv_make}, please try again.`)
       res.status(501).render("inventory/add-inventory", {
         title: "Add New Inventory",
         nav,
+        finalNav
       })
     }
   }
     
 
-module.exports = {buildManagement,buildClassificationForm,addNewClassification, buildInventoryForm, insertInventory}
+module.exports = {buildClassificationForm,addNewClassification, buildInventoryForm, insertInventory}

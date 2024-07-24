@@ -48,8 +48,20 @@ img {
   font-size: 2rem;
 }
 
-#tools a{
+#tools {
+  display: flex;
+}
+
+#tools li {
+  list-style-type: none;
+}
+
+#tools a, #logout a {
   font-size: 0.8rem;
+}
+
+#logout {
+  padding-left: 1.3rem;
 }
 
 /************ Styling for navigation *************/
@@ -305,7 +317,30 @@ textarea  {
   font-size: 16px;
 }
 
+/************ STYLING FOR FINAL PROJECT( Type View)***************/
+/* #type-display li {
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  border: 1.5px solid rgb(194, 193, 193);
+  border-radius: 8px;
+  margin: 0 1rem 1rem;
+} */
 
+#type-display {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  flex-direction: column;
+  margin: 0  1rem;
+}
+
+#type-display li {
+  list-style-type: none;
+  margin: 0 1rem 1rem;
+  border: 1.5px solid rgb(194, 193, 193);
+  border-radius: 8px;
+}
 
 
 @media (min-width: 500px){
@@ -430,6 +465,11 @@ div.main-h {
 
 div#h2-container {
   margin-top: 0;
+}
+
+/************ STYLING FOR FINAL PROJECT( Type View)***************/
+ul#type-display {
+  flex-direction: row;
 }
 
 }
