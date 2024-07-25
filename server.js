@@ -110,6 +110,8 @@ app.use("/product", finalProjectRoute)
 // inv.ejs routes
 app.use("/inventory", inventoryRoute)
 
+app.use("/final", finalProjectRoute)
+
 
 
 // File Not Found Route - must be last route in list

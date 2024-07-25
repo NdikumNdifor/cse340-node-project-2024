@@ -50,5 +50,18 @@ async function getProductByProductId(product_id){
     }
   }
 
-module.exports = {getCategory, getTypeByCategoryId, getProductByTypeId, getProductByProductId}
+
+  /* *****************************
+*   Add New category model
+* *************************** */
+async function addCategory(category_name){
+  try {
+    const sql = "INSERT INTO category (category_name) VALUES ($1) RETURNING *"
+    return await pool.query(sql, [category_name])
+  } catch (error) {
+    return error.message
+  }
+}
+
+module.exports = {getCategory, getTypeByCategoryId, getProductByTypeId, getProductByProductId, addCategory}
   

@@ -1,0 +1,23 @@
+<% if (title) { %>
+    <h1 class="main-h"><%= title %></h1>
+    <%# messages() %>
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+      <% } %>
+
+    <% } else {
+     res.redirect('/')
+    } %>
+
+<div id="add-classi">
+    <form action="/final/category" method="post">
+        <label class="top">Category:
+            <input type="text" id="categoryName" name="category_name" minlength="3" required value="<%= locals.category_name %>">
+        </label>
+        <input type="submit" value="Add a Category" class="submitBtn">
+    </form>
+</div>
